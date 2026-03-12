@@ -1,5 +1,5 @@
-// https://www.mediawiki.org/wiki/Manual:$wgUrlProtocols
 export const protocols = [
+	// https://www.mediawiki.org/wiki/Manual:$wgUrlProtocols
 	'bitcoin',
 	'ftp',
 	'ftps',

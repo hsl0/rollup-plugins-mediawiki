@@ -2,7 +2,7 @@ import type { Plugin, ResolveIdHook } from 'rollup';
 import {
 	protocols as defaultProtocols,
 	namespaces as defaultNamespaces,
-} from './defaultMappings';
+} from './src/defaultMappings';
 
 interface ModuleMappings {
 	wiki: ResolveIdHook;
