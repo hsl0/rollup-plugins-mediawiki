@@ -3,6 +3,8 @@ packages/*/*.js
 packages/*/dist/
 *.map
 
+.rollup.cache
+
 # Logs
 logs
 *.log
