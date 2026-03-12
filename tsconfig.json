@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "skipLibCheck": true,
+        "allowImportingTsExtensions": true,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": true,
+        "composite": true,
+        "paths": {
+            "#monorepo-root/*": [
+                "./*"
+            ]
+        }
+    },
+    "include": [
+        "**/*.ts",
+    ],
+    "exclude": [
+        "vitest.config.ts",
+        "**/*.d.ts"
+    ]
+}

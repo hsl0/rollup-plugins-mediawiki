@@ -1,0 +1,40 @@
+{
+  "name": "rollup-plugins-mediawiki",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "test"
+  ],
+  "scripts": {
+    "test": "vitest run",
+    "build": "npm run bundle & npm run generate-declaration",
+    "generate-declaration": "tsc -p ../../tsconfig.single.declaration.json --rootDir .",
+    "bundle": "npm run bundle -ws"
+  },
+  "devDependencies": {
+    "@rollup/plugin-multi-entry": "^6.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "@rollup/plugin-virtual": "^3.0.2",
+    "@types/core-js": "^2.5.8",
+    "@types/node": "^22.13.5",
+    "@vitest/coverage-v8": "^3.0.7",
+    "@vitest/ui": "^3.0.7",
+    "rollup": "^4.34.8",
+    "rollup-plugin-multi-input": "^1.5.0",
+    "tslib": "^2.8.1",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.7"
+  },
+  "dependencies": {
+    "core-js": "^3.44.0",
+    "core-js-pure": "^3.44.0",
+    "estree-util-attach-comments": "^3.0.0",
+    "estree-walker": "^3.0.3"
+  }
+}

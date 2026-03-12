@@ -1,0 +1,18 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "declaration": true,
+        "emitDeclarationOnly": true,
+        "declarationMap": true,
+        "noEmit": false
+    },
+    "exclude": [
+        "**/*.d.ts",
+        "**/test/*.ts",
+        "**/test.ts",
+        "**/*.test.ts",
+        "vitest.config.ts",
+        "**/src/*"
+    ]
+}

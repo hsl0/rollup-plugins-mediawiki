@@ -1,0 +1,30 @@
+{
+  "name": "vite-plugin-mediawiki-gadget",
+  "version": "0.1.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "main.js",
+  "types": "main.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run bundle",
+    "bundle": "rollup --config ../../rollup.single.config.js",
+    "generate-declaration": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "rollup-plugin-mediawiki-gadget": "^0.1.0"
+  },
+  "files": [
+    "*.d.ts",
+    "*.map"
+  ],
+  "peerDependencies": {
+    "rollup": "^4.34.9"
+  }
+}

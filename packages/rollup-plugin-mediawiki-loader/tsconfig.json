@@ -1,0 +1,19 @@
+{
+    "extends": "../../tsconfig.multi.declaration.json",
+    "compilerOptions": {
+        "declarationDir": "types",
+        "paths": {
+            "#monorepo-root/*": [
+                "../../*"
+            ]
+        },
+        "rootDir": "../.."
+    },
+    "include": [
+        "**/*.ts",
+        "../../*"
+    ],
+    "exclude": [
+        "**/*.d.ts"
+    ]
+}
