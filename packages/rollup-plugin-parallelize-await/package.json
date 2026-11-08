@@ -21,7 +21,9 @@
   },
   "devDependencies": {
     "@types/estree": "^1.0.8",
-    "typescript": "^5.8.2"
+    "rollup": "^4.34.9",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
   },
   "peerDependencies": {
     "rollup": "^4.34.9"
