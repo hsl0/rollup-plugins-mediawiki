@@ -74,3 +74,7 @@ If `true`, the `startup` module is imported before every module.
 
 - This plugin only resolves to URLs. Actually fetching the content from a URL needs another plugin that loads URLs, such as [@rollup/plugin-url](https://www.npmjs.com/package/@rollup/plugin-url).
 - Names that are not in the lists are left alone.
+
+## License
+
+[MIT](../../LICENSE)

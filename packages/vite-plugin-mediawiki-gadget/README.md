@@ -99,3 +99,7 @@ Only when you have not set them, the plugin fills in `build.cssCodeSplit: true` 
 - If there are two or more CSS pages, do not set `build.cssCodeSplit` to `false`; use the default `true` (or set it to `true`). With `false`, the CSS is merged into one file and cannot be split per page.
 - Do not let a CSS page produce JS or be referenced from another chunk. Do not import CSS from JS; declare every CSS file in the definition's `pages`.
 - JSON pages are removed from the build inputs, and Rollup and Vite cannot build with no input at all. A gadget whose pages are empty or only JSON cannot be built, so you need at least one JS or CSS page.
+
+## License
+
+[MIT](../../LICENSE)

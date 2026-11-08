@@ -101,3 +101,7 @@ Both the `@` and `#` prefixes are recognized. If `PURE` and `CONCURRENT` are bot
 ## Limitations
 
 - Calls whose purity cannot be determined stay sequential. Tell the plugin about calls that are safe to run in parallel with `pureFunctions` or a comment.
+
+## License
+
+[MIT](../../LICENSE)

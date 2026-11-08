@@ -131,3 +131,7 @@ Matched dynamic imports are marked external and rendered normally by Rollup. For
 - `false`: `Promise.resolve().then(() => require('target'))`
 
 Computed imports such as `import(moduleName)` are selected only when `target` itself is omitted; otherwise they are left to Rollup because their target cannot be matched statically. Other output formats retain their normal Rollup dynamic-import behavior.
+
+## License
+
+[MIT](../../LICENSE)

@@ -128,3 +128,7 @@ Declare a dependency in the package that uses it.
 1. Create `packages/<name>/` with a `package.json` (`"main": "dist/main.js"`, `"types": "dist/main.d.ts"`, `"files": ["dist"]`, `"scripts": { "build": "tsc -p ." }`), a `tsconfig.json` like the other packages (extends `../../tsconfig.json`, `noEmit: false`, `outDir: "dist"`, `rootDir: "src"`, `paths: {}`, includes `src/**/*.ts`), `src/main.ts`, a `test/` folder and a `README.md`.
 2. Add the folder to `workspaces` in the root `package.json`, **after the packages it depends on**.
 3. Add its name to `paths` in the root `tsconfig.json` (so the editor resolves the package to its source), then run `npm install`.
+
+## License
+
+[MIT](LICENSE)

@@ -97,3 +97,7 @@ importToDynamicImport({ include: ['esm-only-package'] });
 
 - The plugin generates top-level `await`, so the output environment must support it.
 - A warning is printed when the `exports` output option is not `'none'`.
+
+## License
+
+[MIT](../../LICENSE)

@@ -97,3 +97,7 @@ Wraps the whole chunk in `mw.loader.using([...]).then(...)`. If `false`, the out
 
 - The generated wrapper assumes `mw` is a global. The output does not run outside a MediaWiki page.
 - Module IDs must be written in the options. They are not discovered by querying the wiki.
+
+## License
+
+[MIT](../../LICENSE)

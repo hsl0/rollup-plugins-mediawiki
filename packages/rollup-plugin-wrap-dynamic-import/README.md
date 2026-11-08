@@ -44,3 +44,7 @@ export { load };
 ## Notes
 
 - Because it uses `new Function`, it does not work in environments where the `Content-Security-Policy` forbids `unsafe-eval`.
+
+## License
+
+[MIT](../../LICENSE)

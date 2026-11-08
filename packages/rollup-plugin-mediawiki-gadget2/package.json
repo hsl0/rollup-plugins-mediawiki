@@ -2,7 +2,7 @@
   "name": "rollup-plugin-mediawiki-gadget2",
   "version": "0.1.0",
   "description": "",
-  "license": "ISC",
+  "license": "MIT",
   "author": "",
   "type": "module",
   "main": "dist/main.js",

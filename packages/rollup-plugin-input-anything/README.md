@@ -77,3 +77,7 @@ With this config, `.a { color: red; }` becomes `/* min */ .a { color: blue; }`.
 
 - If several configs are given, **only the first matching one** is used. A warning is printed when more than one matches (`only the first one is used`).
 - If every input matches, no JS input is left. Rollup needs at least one input, so another plugin has to supply one.
+
+## License
+
+[MIT](../../LICENSE)

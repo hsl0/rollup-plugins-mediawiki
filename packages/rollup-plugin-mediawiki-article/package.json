@@ -2,7 +2,7 @@
   "name": "rollup-plugin-mediawiki-article",
   "version": "0.1.0",
   "description": "",
-  "license": "ISC",
+  "license": "MIT",
   "author": "hsl0",
   "type": "module",
   "main": "dist/main.js",

@@ -2,7 +2,7 @@
   "name": "rollup-plugin-require-binding",
   "version": "0.1.0",
   "description": "Bind selected Rollup imports to require() independently of the output format.",
-  "license": "ISC",
+  "license": "MIT",
   "author": "",
   "type": "module",
   "main": "dist/main.js",

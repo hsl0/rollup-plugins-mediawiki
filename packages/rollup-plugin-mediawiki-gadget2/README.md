@@ -106,3 +106,7 @@ It is almost identical to the [JSON format of MediaWiki:Gadgets subpages](https:
 - Declare every CSS file in the definition's `pages`. Importing CSS from JS (`import './x.css'`) is not supported.
 - A JS page is required. CSS and JSON pages are removed from Rollup's inputs, so with no JS input Rollup fails with a missing-input error. A gadget with only CSS can be built with [`vite-plugin-mediawiki-gadget`](../vite-plugin-mediawiki-gadget).
 - The definition file is watched, and changing it triggers a rebuild.
+
+## License
+
+[MIT](../../LICENSE)

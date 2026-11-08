@@ -123,3 +123,7 @@ If `'wiki'`, specifiers starting with `./` or `../` are passed to the wiki resol
 ## Known issues
 
 - There is no feature that fetches namespaces automatically through the wiki API.
+
+## License
+
+[MIT](../../LICENSE)
