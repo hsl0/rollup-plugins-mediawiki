@@ -1,0 +1,29 @@
+{
+  "name": "rollup-plugin-parallelize-await",
+  "version": "0.1.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "acorn": "^8.15.0",
+    "acorn-walk": "^8.3.4",
+    "estree-util-attach-comments": "^3.0.0",
+    "magic-string": "^0.30.17"
+  },
+  "devDependencies": {
+    "@types/estree": "^1.0.8",
+    "typescript": "^5.8.2"
+  },
+  "peerDependencies": {
+    "rollup": "^4.34.9"
+  }
+}
