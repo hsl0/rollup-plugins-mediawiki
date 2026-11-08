@@ -1,0 +1,83 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`top level await > no imports 1`] = `
+"console.log('Hello, World!');
+"
+`;
+
+exports[`top level await > transforms default and named import 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js.default, myModule_js.bar);
+"
+`;
+
+exports[`top level await > transforms default and namespace import 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js.default, myModule_js);
+"
+`;
+
+exports[`top level await > transforms default import 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js.default);
+"
+`;
+
+exports[`top level await > transforms multiple colliding imports with alias from different sources 1`] = `
+"const [myModule_js, otherModule_js] = await Promise.all([import('myModule.js'), import('otherModule.js')]);
+
+console.log(myModule_js.foo, otherModule_js.foo);
+"
+`;
+
+exports[`top level await > transforms multiple imports from different sources 1`] = `
+"const [, myModule0_js, myModule1_js, myModule2_js] = await Promise.all([import('myModule.js'), import('myModule0.js'), import('myModule1.js'), import('myModule2.js')]);
+
+console.log(myModule0_js.default, myModule1_js.bar, myModule2_js);
+"
+`;
+
+exports[`top level await > transforms multiple imports from same source 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js.default, myModule_js.bar, myModule_js);
+"
+`;
+
+exports[`top level await > transforms multiple namespace import from same source 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js, myModule_js);
+"
+`;
+
+exports[`top level await > transforms named import 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js.bar);
+"
+`;
+
+exports[`top level await > transforms named import with alias 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js.bar);
+"
+`;
+
+exports[`top level await > transforms namespace import 1`] = `
+"const myModule_js = await import('myModule.js');
+
+console.log(myModule_js);
+"
+`;
+
+exports[`top level await > transforms void import 1`] = `
+"await import('myModule.js');
+
+console.log('Hello, World!');
+"
+`;
