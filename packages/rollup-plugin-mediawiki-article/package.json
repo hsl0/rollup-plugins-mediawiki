@@ -1,21 +1,24 @@
 {
-  "name": "rollup-plugin-mediawiki-page-resolve",
+  "name": "rollup-plugin-mediawiki-article",
   "version": "0.1.0",
   "description": "",
   "license": "ISC",
   "author": "hsl0",
   "type": "module",
-  "main": "main.js",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run bundle",
-    "bundle": "rollup --config ../../rollup.single.config.js",
-    "generate-declaration": "tsc"
+    "build": "tsc -p ."
+  },
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "rollup": "^4.34.9"
-  },
-  "devDependencies": {
-    "typescript": "^5.8.2"
   }
 }

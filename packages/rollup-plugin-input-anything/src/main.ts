@@ -1,5 +1,4 @@
 import type { Plugin } from 'rollup';
-import { toArray } from '#monorepo-root/util.js';
 import { readFile } from 'node:fs/promises';
 import * as path from 'node:path';
 
@@ -22,9 +21,7 @@ function toRecord(
 ): Record<string, string> {
 	if (typeof input === 'string') return { [path.basename(input, '.js')]: input };
 	if (Array.isArray(input))
-		return Object.fromEntries(
-			input.map((input) => [path.basename(input, '.js'), input])
-		);
+		return Object.fromEntries(input.map((input) => [path.basename(input, '.js'), input]));
 	return input;
 }
 
@@ -35,23 +32,27 @@ export default function inputAnything(...configs: InputAnythingConfig[]): Plugin
 		options(options) {
 			if (!options.input) return;
 
-			const inputs = toRecord(options.input);
+			const inputs: Record<string, string> = {};
 
-			for (const [output, input] of Object.entries(inputs)) {
-				for (const config of configs)
-					if (
+			for (const [output, input] of Object.entries(toRecord(options.input))) {
+				const matched = configs.filter(
+					(config) =>
 						config.pattern?.test(input) ||
-						toArray(config.extensions).some((ext) => input.endsWith(ext))
-					) {
-						delete inputs[output];
-						assets.push({
-							input,
-							output,
-							transformer: toArray(
-								config.transformer
-							) as Transformer[],
-						});
-					}
+						[config.extensions ?? []].flat().some((ext) => input.endsWith(ext))
+				);
+				if (!matched.length) {
+					inputs[output] = input;
+					continue;
+				}
+				if (matched.length > 1)
+					this.warn(
+						`${input} matches ${matched.length} input configs; only the first one is used`
+					);
+				assets.push({
+					input,
+					output,
+					transformer: [matched[0].transformer ?? []].flat() as Transformer[],
+				});
 			}
 
 			return { ...options, input: inputs };
@@ -62,8 +63,7 @@ export default function inputAnything(...configs: InputAnythingConfig[]): Plugin
 					const resolved = (await this.resolve(input))?.id;
 					let source = (await readFile(resolved || input)).toString();
 
-					for (const transformer of transformers)
-						source = await transformer(source);
+					for (const transformer of transformers) source = await transformer(source);
 
 					this.emitFile({
 						type: 'asset',
