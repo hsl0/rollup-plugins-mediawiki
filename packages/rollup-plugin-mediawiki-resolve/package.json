@@ -1,0 +1,25 @@
+{
+  "name": "rollup-plugin-mediawiki-resolve",
+  "version": "0.1.0",
+  "description": "Resolve MediaWiki ResourceLoader dependencies through load.php",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p ."
+  },
+  "devDependencies": {
+    "@rollup/plugin-virtual": "^3.0.2",
+    "rollup": "^4.34.9",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
+  },
+  "peerDependencies": {
+    "rollup": "^4.34.9"
+  }
+}
