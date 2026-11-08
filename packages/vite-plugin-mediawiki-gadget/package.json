@@ -5,26 +5,23 @@
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "main.js",
-  "types": "main.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run bundle",
-    "bundle": "rollup --config ../../rollup.single.config.js",
-    "generate-declaration": "tsc"
+    "build": "tsc -p ."
+  },
+  "dependencies": {
+    "rollup-plugin-mediawiki-gadget2": "^0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.8.2",
     "vite": "^6.2.0"
   },
-  "dependencies": {
-    "rollup-plugin-mediawiki-gadget": "^0.1.0"
-  },
-  "files": [
-    "*.d.ts",
-    "*.map"
-  ],
   "peerDependencies": {
-    "rollup": "^4.34.9"
+    "vite": "^6.2.0"
   }
 }
