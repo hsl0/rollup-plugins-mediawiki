@@ -1,5 +1,5 @@
 import type { Plugin } from 'rollup';
-import rel2abs from './rel2abs';
+import rel2abs from './rel2abs.js';
 
 export default function mwArticleRelative(): Plugin {
 	return {

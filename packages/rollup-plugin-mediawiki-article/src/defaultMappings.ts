@@ -1,4 +1,7 @@
 export const protocols = [
+	'data',
+	'blob',
+
 	// https://www.mediawiki.org/wiki/Manual:$wgUrlProtocols
 	'bitcoin',
 	'ftp',
