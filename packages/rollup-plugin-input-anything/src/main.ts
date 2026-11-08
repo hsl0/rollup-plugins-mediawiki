@@ -32,21 +32,27 @@ export default function inputAnything(...configs: InputAnythingConfig[]): Plugin
 		options(options) {
 			if (!options.input) return;
 
-			const inputs = toRecord(options.input);
+			const inputs: Record<string, string> = {};
 
-			for (const [output, input] of Object.entries(inputs)) {
-				for (const config of configs)
-					if (
+			for (const [output, input] of Object.entries(toRecord(options.input))) {
+				const matched = configs.filter(
+					(config) =>
 						config.pattern?.test(input) ||
 						[config.extensions ?? []].flat().some((ext) => input.endsWith(ext))
-					) {
-						delete inputs[output];
-						assets.push({
-							input,
-							output,
-							transformer: [config.transformer ?? []].flat() as Transformer[],
-						});
-					}
+				);
+				if (!matched.length) {
+					inputs[output] = input;
+					continue;
+				}
+				if (matched.length > 1)
+					this.warn(
+						`${input} matches ${matched.length} input configs; only the first one is used`
+					);
+				assets.push({
+					input,
+					output,
+					transformer: [matched[0].transformer ?? []].flat() as Transformer[],
+				});
 			}
 
 			return { ...options, input: inputs };
