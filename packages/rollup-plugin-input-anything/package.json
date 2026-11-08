@@ -15,7 +15,10 @@
     "build": "tsc -p ."
   },
   "devDependencies": {
-    "typescript": "^5.8.2"
+    "@types/node": "^22.20.5",
+    "rollup": "^4.34.9",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
   },
   "peerDependencies": {
     "rollup": "^4.34.9"
