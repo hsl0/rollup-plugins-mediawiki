@@ -8,12 +8,20 @@
   "main": "index.js",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "test"
+    "packages/rollup-plugin-parallelize-await",
+    "packages/rollup-plugin-import-to-dynamic-import",
+    "packages/rollup-plugin-input-anything",
+    "packages/rollup-plugin-require-binding",
+    "packages/rollup-plugin-mediawiki",
+    "packages/rollup-plugin-mediawiki-article",
+    "packages/rollup-plugin-mediawiki-gadget2",
+    "packages/rollup-plugin-mediawiki-resolve",
+    "packages/rollup-plugin-wrap-dynamic-import",
+    "packages/vite-plugin-mediawiki-gadget"
   ],
   "scripts": {
     "test": "vitest run",
-    "build": "npm run build -w rollup-plugin-parallelize-await && npm run build -w rollup-plugin-import-to-dynamic-import && npm run build -w rollup-plugin-input-anything && npm run build -w rollup-plugin-require-binding && npm run build -w rollup-plugin-mediawiki && npm run build -w rollup-plugin-mediawiki-article && npm run build -w rollup-plugin-mediawiki-gadget2 && npm run build -w rollup-plugin-mediawiki-resolve && npm run build -w rollup-plugin-wrap-dynamic-import && npm run build -w vite-plugin-mediawiki-gadget",
+    "build": "npm run build -ws --if-present",
     "format": "prettier --write \"**/*.{ts,js,mjs}\"",
     "format:check": "prettier --check \"**/*.{ts,js,mjs}\""
   },
