@@ -1,54 +1,27 @@
 {
-	"compilerOptions": {
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"skipLibCheck": true,
-		"declaration": true,
-		"declarationMap": true,
-		"paths": {
-			"rollup-plugin-import-to-dynamic-import": [
-				"./packages/rollup-plugin-import-to-dynamic-import/src/main.ts"
-			],
-			"rollup-plugin-input-anything": [
-				"./packages/rollup-plugin-input-anything/src/main.ts"
-			],
-			"rollup-plugin-mediawiki": [
-				"./packages/rollup-plugin-mediawiki/src/main.ts"
-			],
-			"rollup-plugin-mediawiki-article": [
-				"./packages/rollup-plugin-mediawiki-article/src/main.ts"
-			],
-			"rollup-plugin-mediawiki-gadget2": [
-				"./packages/rollup-plugin-mediawiki-gadget2/src/main.ts"
-			],
-			"rollup-plugin-mediawiki-resolve": [
-				"./packages/rollup-plugin-mediawiki-resolve/src/main.ts"
-			],
-			"rollup-plugin-parallelize-await": [
-				"./packages/rollup-plugin-parallelize-await/src/main.ts"
-			],
-			"rollup-plugin-require-binding": [
-				"./packages/rollup-plugin-require-binding/src/main.ts"
-			],
-			"rollup-plugin-wrap-dynamic-import": [
-				"./packages/rollup-plugin-wrap-dynamic-import/src/main.ts"
-			],
-			"vite-plugin-mediawiki-gadget": [
-				"./packages/vite-plugin-mediawiki-gadget/src/main.ts"
-			]
-		},
-		"noEmit": true,
-		"sourceMap": true
-	},
-	"include": [
-		"**/*.ts"
-	],
-	"exclude": [
-		"vitest.config.ts",
-		"**/*.d.ts",
-		"**/node_modules"
-	]
+    "compilerOptions": {
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "skipLibCheck": true,
+        "allowImportingTsExtensions": true,
+        "declaration": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": true,
+        "composite": true,
+        "paths": {
+            "#monorepo-root/*": [
+                "./*"
+            ]
+        }
+    },
+    "include": [
+        "**/*.ts",
+    ],
+    "exclude": [
+        "vitest.config.ts",
+        "**/*.d.ts"
+    ]
 }

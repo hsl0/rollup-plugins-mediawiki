@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config';
+import resolveMonorepoRoot from './rollup-plugin-resolve-monorepo-root.js';
 import {} from 'vitest/';
 
 export default defineConfig({
@@ -19,7 +20,8 @@ export default defineConfig({
 		snapshotSerializers: [],
 		coverage: {
 			enabled: true,
-			include: ['packages/*/src/**/*.ts'],
+			include: ['packages/*/main.ts', 'packages/*/src/**/*.ts', 'util.ts'],
 		},
 	},
+	plugins: [resolveMonorepoRoot()],
 });

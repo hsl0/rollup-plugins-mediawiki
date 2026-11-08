@@ -6,7 +6,11 @@ export function toArray<T>(arr?: T[] | T): T[] {
 
 export function extendIntroOutro(...args: OutputOptions['footer'][]): AddonFunction {
 	return async (chunk) =>
-		(await Promise.all(args.map((x) => (typeof x === 'function' ? x(chunk) : x))))
+		(
+			await Promise.all(
+				args.map((x) => (typeof x === 'function' ? x(chunk) : x))
+			)
+		)
 			.filter((x) => x)
 			.join('\n');
 }
