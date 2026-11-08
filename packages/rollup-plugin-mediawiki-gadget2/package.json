@@ -1,29 +1,27 @@
 {
-  "name": "rollup-plugin-mediawiki-gadget",
+  "name": "rollup-plugin-mediawiki-gadget2",
   "version": "0.1.0",
   "description": "",
   "license": "ISC",
   "author": "",
   "type": "module",
-  "main": "main.js",
-  "types": "main.d.ts",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run bundle",
-    "bundle": "rollup --config ../../rollup.single.config.js",
-    "generate-declaration": "tsc"
+    "build": "tsc -p ."
   },
   "dependencies": {
     "rollup-plugin-input-anything": "^0.1.0",
-    "rollup-plugin-mediawiki-loader": "^0.1.0"
+    "rollup-plugin-mediawiki": "^0.1.0"
   },
   "devDependencies": {
+    "@types/node": "^22.20.5",
     "typescript": "^5.8.2"
   },
-  "files": [
-    "*.d.ts",
-    "*.map"
-  ],
   "peerDependencies": {
     "rollup": "^4.34.9"
   }
