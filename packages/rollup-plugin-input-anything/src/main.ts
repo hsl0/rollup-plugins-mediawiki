@@ -1,5 +1,4 @@
 import type { Plugin } from 'rollup';
-import { toArray } from '#monorepo-root/util.js';
 import { readFile } from 'node:fs/promises';
 import * as path from 'node:path';
 
@@ -22,9 +21,7 @@ function toRecord(
 ): Record<string, string> {
 	if (typeof input === 'string') return { [path.basename(input, '.js')]: input };
 	if (Array.isArray(input))
-		return Object.fromEntries(
-			input.map((input) => [path.basename(input, '.js'), input])
-		);
+		return Object.fromEntries(input.map((input) => [path.basename(input, '.js'), input]));
 	return input;
 }
 
@@ -41,15 +38,13 @@ export default function inputAnything(...configs: InputAnythingConfig[]): Plugin
 				for (const config of configs)
 					if (
 						config.pattern?.test(input) ||
-						toArray(config.extensions).some((ext) => input.endsWith(ext))
+						[config.extensions ?? []].flat().some((ext) => input.endsWith(ext))
 					) {
 						delete inputs[output];
 						assets.push({
 							input,
 							output,
-							transformer: toArray(
-								config.transformer
-							) as Transformer[],
+							transformer: [config.transformer ?? []].flat() as Transformer[],
 						});
 					}
 			}
@@ -62,8 +57,7 @@ export default function inputAnything(...configs: InputAnythingConfig[]): Plugin
 					const resolved = (await this.resolve(input))?.id;
 					let source = (await readFile(resolved || input)).toString();
 
-					for (const transformer of transformers)
-						source = await transformer(source);
+					for (const transformer of transformers) source = await transformer(source);
 
 					this.emitFile({
 						type: 'asset',

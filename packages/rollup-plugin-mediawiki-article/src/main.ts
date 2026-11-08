@@ -2,34 +2,42 @@ import type { Plugin, ResolveIdHook } from 'rollup';
 import {
 	protocols as defaultProtocols,
 	namespaces as defaultNamespaces,
-} from './src/defaultMappings';
+} from './defaultMappings.js';
+
+type ModuleResolver = Extract<
+	NonNullable<Plugin['resolveId']>,
+	(...args: Parameters<ResolveIdHook>) => unknown
+>;
 
 interface ModuleMappings {
-	wiki: ResolveIdHook;
-	loader: ResolveIdHook;
+	wiki: ModuleResolver;
+	loader: ModuleResolver;
 }
 
 interface PrefixMappings {
-	namespaces: string[];
-	protocols: string[];
+	wikiNamespaces: string[];
+	urlProtocols: string[];
 	forbiddenPrefix: string[];
-	unknownPrefix: 'wiki' | 'url' | 'loader' | 'never';
+	fallbackResolution: 'wiki' | 'url' | 'loader' | 'never';
 }
 
 interface RelativeMappings {
 	relative: false | 'wiki';
 }
 
-type MWPageResolveConfig = ModuleMappings & PrefixMappings & RelativeMappings;
+export type MWPageResolveConfig = ModuleMappings & PrefixMappings & RelativeMappings;
 
 function createPrefixMap({
-	protocols,
-	namespaces,
+	urlProtocols: protocols,
+	wikiNamespaces: namespaces,
 	forbiddenPrefix,
 }: PrefixMappings) {
-	const mappings: Record<string, 'protocol' | 'namespace' | 'forbidden'> = {};
-	namespaces = namespaces.map((prefix) =>
-		prefix.toLowerCase().replaceAll('_', ' '),
+	const mappings: Record<string, 'protocol' | 'namespace' | 'forbidden'> =
+		Object.create(null);
+	protocols = protocols.map((prefix) => prefix.toLowerCase());
+	namespaces = namespaces.map((prefix) => prefix.toLowerCase().replaceAll('_', ' '));
+	forbiddenPrefix = forbiddenPrefix.map((prefix) =>
+		prefix.toLowerCase().replaceAll('_', ' ')
 	);
 	const overwraps = new Set(namespaces).intersection(new Set(protocols));
 
@@ -37,7 +45,7 @@ function createPrefixMap({
 		throw new TypeError(
 			`Prefix ${Array.from(overwraps).join(', ')} ${
 				overwraps.size > 1 ? 'has' : 'have'
-			} overwrapped definitions between URL protocol and Wiki namespace`,
+			} overwrapped definitions between URL protocol and Wiki namespace`
 		);
 	}
 
@@ -54,58 +62,47 @@ function createPrefixMap({
 	return mappings;
 }
 
-function createModuleTransformer(mappings: MWPageResolveConfig): ResolveIdHook {
+function createModuleTransformer(mappings: MWPageResolveConfig): ModuleResolver {
 	const prefixMappings = createPrefixMap(mappings);
-
 	return function (name, importer, options) {
+		if (
+			name.includes('\0') ||
+			/^[a-z]:[\\/]|^\\\\/i.test(name) ||
+			options.custom?.['node-resolve']?.resolved
+		)
+			return null;
 		if (/^\//.test(name)) return name; // / => url
 		if (mappings.relative === 'wiki' && /^\.\.?(\/|$)/.test(name))
-			// ../
 			return mappings.wiki.call(this, name, importer, options);
 		if (/^[^\/#:]*:/.test(name))
-			switch (
-				prefixMappings[name.split(':')[0].replaceAll('_', ' ').toLowerCase()]
-			) {
+			switch (prefixMappings[name.split(':')[0].replaceAll('_', ' ').toLowerCase()]) {
 				case 'namespace':
 					return mappings.wiki.call(this, name, importer, options); // wiki
 				case 'protocol':
 					return name; // url
 				case 'forbidden':
-					throw new TypeError(
-						`Prefix "${name.split(':')[0]}" is forbidden`,
-					);
+					throw new TypeError(`Prefix "${name.split(':')[0]}" is forbidden`);
 				default:
-					switch (mappings.unknownPrefix) {
+					switch (mappings.fallbackResolution) {
 						case 'wiki':
 							return mappings.wiki.call(this, name, importer, options);
 						case 'url':
 							return name;
 						case 'loader':
-							return mappings.loader.call(
-								this,
-								name,
-								importer,
-								options,
-							);
+							return mappings.loader.call(this, name, importer, options);
 						case 'never':
-							throw new TypeError(
-								`Unknown prefix detected: ${name.split(':')[0]}`,
-							);
+							throw new TypeError(`Unknown prefix detected: ${name.split(':')[0]}`);
 					}
 			}
-		if (/^@?[a-z-._\/]+/.test(name))
-			return mappings.loader.call(this, name, importer, options);
-		throw new TypeError(`'${name}' is not valid js module`);
+		return mappings.loader.call(this, name, importer, options);
 	};
 }
 
-export default function mwPageResolve(
-	mappings: Partial<MWPageResolveConfig>,
-): Plugin {
-	if (!mappings.protocols) mappings.protocols = defaultProtocols;
-	if (!mappings.namespaces) mappings.namespaces = defaultNamespaces;
+export default function mwPageResolve(mappings: Partial<MWPageResolveConfig>): Plugin {
+	if (!mappings.urlProtocols) mappings.urlProtocols = defaultProtocols;
+	if (!mappings.wikiNamespaces) mappings.wikiNamespaces = defaultNamespaces;
 	if (!mappings.forbiddenPrefix) mappings.forbiddenPrefix = [];
-	if (!mappings.unknownPrefix) mappings.unknownPrefix = 'wiki';
+	if (!mappings.fallbackResolution) mappings.fallbackResolution = 'wiki';
 	if (!mappings.loader) mappings.loader = (name: string) => null;
 	if (!mappings.wiki) mappings.wiki = (name: string) => null;
 
@@ -113,7 +110,7 @@ export default function mwPageResolve(
 
 	return {
 		name: 'mediawiki-page-resolve',
-		resolveId(source, importer, options) {
+		async resolveId(source, importer, options) {
 			return transform.call(this, source, importer, options);
 		},
 	};
