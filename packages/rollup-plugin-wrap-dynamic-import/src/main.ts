@@ -5,7 +5,7 @@ export default function wrapDynamicImport(): Plugin {
 		name: 'wrap-dynamic-import',
 		renderDynamicImport() {
 			return {
-				left: "new Function('module', 'import(module)')(",
+				left: "new Function('module', 'return import(module)')(",
 				right: ')',
 			};
 		},
